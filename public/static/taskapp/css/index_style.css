@@ -1,0 +1,257 @@
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    background-image: none;
+}
+
+
+.color-white{
+    color: aliceblue;
+}
+.color-black{
+    color: black;
+}
+
+
+
+
+
+/* navbar----------------------------------------------------------------------- */
+.navbar {
+    background-color: #333;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+}
+.container_of_navbars_things{
+    width: 22rem;
+    min-height: 3.5rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.container_of_navbars_things:first-child{
+    justify-content: flex-start;
+}
+.navbar a {
+    border-radius: 1rem;
+    height: 2.5rem;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+#todays_tasks,#pending_tasks,#completed_tasks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.navbar #user_login,#user_signup,#user_logout{
+    background-color: #066aa6;
+    width: 5rem;
+    height: 2rem;
+    margin: 0 .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new_task_btn {
+    width: 5rem;
+    height: 2rem;
+    margin-right: 1rem;
+    padding: .2rem;
+    border: 0.15rem solid black;
+    border-radius: 0.4rem;
+    background: #6d6;
+}
+#a_for_dock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+}
+#hide-side-menu{
+    display: none;
+}
+.container_of_profile_things{
+    display: none;
+}
+.new_task_btn_in{
+    display: none;
+}
+.profile_in_dock{
+    width: 100%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.profile_in_dock h4,p{ 
+    text-align: center;
+    width: 100%;
+    color: #f9f9f9;
+}
+
+/* container---------------------------------------------------------------- */
+.container {
+    width: 100vw;
+    height: auto;
+    background-color: rgba(7, 57, 68, 0.6);
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+
+
+
+/* left for task card showing------------------------------------------------------- */
+.show_tasks {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+
+.task-card {
+    background-color: #eee;
+    border: 1px solid #ddd;
+    border-radius: 0 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 17rem;
+    height: 15rem;
+    padding: .5rem;
+    margin: .5rem;
+    transition: transform 0.2s;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+}
+
+.task-title {
+    margin-bottom: 13px;
+}
+
+.task-datetime, .task-description {
+    color: #555;
+    margin-bottom: 10px;
+}
+.task-description {
+    height: 45%;
+}
+.task_status_button_container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+}
+.task_status_buttons{
+    width: 3rem;
+    height: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* add new task pannel here  -----------------------------------------*/
+.add_tasks{
+    width: 400px;
+    height: 60vh;
+    background-color: rgb(181, 188, 193);
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.task_buttons_container {
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(137, 138, 138);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.new_task_hide_btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    background-color: #96eade;
+    border: none;
+}
+.new_task_form{
+    width: 100%;
+    height: 50vh;
+}
+.new_task_form form{
+    width: 100%;
+    height: 100%;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.new_task_form form label{ 
+    width: 100%;
+    max-height: 1.5rem;
+    margin: .25rem 0;
+}
+.new_task_form form input{ 
+    width: 100%;
+    height: 2rem;
+    margin: .25rem 0;
+    font-size: 1rem;
+    text-align: center;
+}
+.new_task_form form textarea{ 
+    width: 100%;
+    height: 50%;
+    font-size: 1rem;
+}
+.new_task_form form #submit-btn{ 
+    width: 8rem;
+    height: 2rem;
+    margin: 1rem 0;
+    padding: .2rem;
+    border: 0.15rem solid black;
+    border-radius: .25rem;
+    background-color: #42d200;
+}
+

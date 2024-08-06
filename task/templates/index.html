@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <!-- <link rel="stylesheet" href="index_style.css"> -->
+    <link rel="stylesheet" href="{% static 'taskapp/css/index_style.css' %}">
+    <link rel="stylesheet" href="{% static 'taskapp/css/index_querys.css' %}">
+</head>
+<body>
+
+
+<div class="navbar">
+        <div class="container_of_navbars_things">
+            <a id="todays_tasks" href="/todays-tasks/">Today's Tasks</a>
+            <a id="pending_tasks" href="/pending-tasks/">Pending</a>
+            <a id="completed_tasks" href="/completed-tasks/">Completed</a>
+        </div>
+
+        <div class="container_of_navbars_things" id="docks_container">
+            <button class="new_task_btn" onclick="new_task()">New Task</button>
+        {% if request.user.is_authenticated %}
+                <a href="javascript:void(0);" id="a_for_dock" style="border-radius: 50%;" onclick="side_menu_on()">
+                    <img {% if request.user.userprofile.profile_photo %} src="{{ request.user.userprofile.profile_photo.url }}" {% else %} src="{% static 'userlogsapp/img/default_profile.jpeg' %}" {% endif %}  alt="Profile Photo" style="border-radius: 50%;width: 100%;height: 100%;;">
+                </a>
+        {% else %}
+            <a href="javascript:void(0);" id="a_for_dock" onclick="side_menu_on()">&#9776;</a>
+        {% endif %}
+        
+        </div>
+
+        <div class="container_of_profile_things " id="side-menu">
+
+            <button id="hide-side-menu" onclick="side_menu_off()">&#10005;</button>
+
+            {% if request.user.is_authenticated %}
+                <div class="profile_in_dock">
+                    <img 
+                        src="{% if request.user.userprofile.profile_photo %}{{ request.user.userprofile.profile_photo.url }}{% else %}{% static 'userlogsapp/img/default_profile.jpeg' %}{% endif %}" 
+                        alt="Profile Photo" 
+                        style="border-radius: 50%; width: 5rem; height: 5rem;">
+                    <p>@{{ request.user.username }}</p>
+                    <h4>Name: {{ request.user.get_full_name }}</h4>
+                </div>
+            {% endif %}  
+
+            <button class="new_task_btn_in" onclick="new_task()">New Task</button>
+
+            {% if request.user.is_authenticated %}
+            <a id="user_logout" href="{% url 'logout_page' %}">Logout</a>
+            {% else %}
+            <a id="user_login" href="{% url 'login_page' %}">Login</a>
+            <a id="user_signup" href="{% url 'signup_page' %}">SignUp</a>
+            {% endif %}
+
+        </div>
+</div>
+
+    
+
+
+<div class="container">
+    <div class="show_tasks">
+        
+        {% for task in queryset %}
+        <div class="task-card">
+            <h3 class="task-title">{{task.title}}</h3>
+            <p class="task-datetime"><b>Target:</b>{{task.date_time_target}}</p>
+            <p class="task-description">{{task.description|slice:":100"}}......................</p>
+
+            <div class="task_status_button_container">
+                {% if request_came_for == "pending_tasks" or request_came_for == "todays_tasks" %}
+                <form onsubmit="return confirm_action(event, 'complete')" action="/complete-the-task/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="task_id" value="{{task.id}}">
+                    <button type="submit" class="task_status_buttons">&#9989;</button>
+                </form>
+                {% endif %}
+                <form onsubmit="return confirm_action(event, 'delete')" action="/delete-the-task/" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="task_id" value="{{task.id}}">
+                    <button type="submit" class="task_status_buttons">&#x274C;</button>
+                </form>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+
+
+    <div class="add_tasks">
+        <div class="task_buttons_container">
+            <h3>Create New Task</h3>
+            <button class="new_task_hide_btn" onclick="hide_new_task()">&times; </button>
+        </div>
+        <div class="new_task_form">
+            <form action="{% url 'new_task' %}" method="post">
+                {% csrf_token %}
+                <label for="title">Titls:</label>
+                <input type="text" placeholder="Title" id="title" name="title" required>
+                <label for="datetime">Target Datetime:</label>
+                <input type="datetime-local" id="datetime" name="date_time" required>
+                <label for="description">Description:</label>
+                <textarea  id="description" name="description" placeholder="mm/dd/yyyy, HH:MM AM/PM      IS DATETIME FORMATE"></textarea>
+                <button id="submit-btn" class="sbtn">Create Task</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+    
+<!-- <script src="index_script.js"></script> -->
+{% if request_came_for %}
+<script>
+    var a_for_highlighting = "{{ request_came_for|escapejs }}";
+</script>
+{% endif %}
+<script src="{% static 'taskapp/js//index_script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'userlogsapp/css/login_page_style.css' %}">
+
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        
+        <form method="post">
+            
+            {% csrf_token %}
+            {% if messages %}
+            <div class="form-group" style="color:white;background:#3a99d2">
+                {% for message in messages %}
+                {{message}}
+                {% endfor%}
+            </div>
+            {% endif%}
+            <div class="form-group">
+                <label for="id_username">Username:</label><br>
+                <input type="text" id="id_username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password">Password:</label><br>
+                <input type="password" id="id_password" name="password" required>
+            </div>
+            <span>not having account <a href="{% url 'signup_page' %}" class="signup">SignUp</a> </span>
+            <input type="submit" class="btn-submit">
+        </form>
+    </div>
+</body>
+</html>
